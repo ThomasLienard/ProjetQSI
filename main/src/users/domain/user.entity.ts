@@ -6,8 +6,7 @@ import {
   UpdateDateColumn,
   OneToMany,
 } from 'typeorm';
-import { Campaign } from '../../campaigns/domain/campaign.entity';
-import { Contribution } from '../../contributions/entity/contribution.entity';
+import * as contributionEntity from '../../contributions/entity/contribution.entity';
 
 export enum UserRole {
   USER = 'user',
@@ -54,11 +53,8 @@ export class User {
   @Column({ nullable: true })
   avatarUrl: string;
 
-  @OneToMany(() => Campaign, (campaign) => campaign.creator)
-  campaigns: Campaign[];
-
-  @OneToMany(() => Contribution, (contribution) => contribution.user)
-  contributions: Contribution[];
+  @OneToMany(() => contributionEntity.ContributionEntity, (contribution) => contribution.userId)
+  contributions: contributionEntity.ContributionEntity[];
 
   @CreateDateColumn()
   createdAt: Date;

@@ -1,5 +1,5 @@
 import { Contribution, ContributionStatus } from '../dto/contribution';
-import { ContributionRepository } from '../repository/contribution.repository';
+import { ContributionRepository } from '../repository/contribution.repository.interface';
 import { CampaignGateway } from '../dto/campaign-gateway.interface';
 
 export interface ContributeRequest {
