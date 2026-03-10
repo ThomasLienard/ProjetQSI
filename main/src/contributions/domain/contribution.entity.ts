@@ -3,13 +3,11 @@ import {
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
-  UpdateDateColumn,
   ManyToOne,
   OneToOne,
   JoinColumn,
 } from 'typeorm';
 import { User } from '../../users/domain/user.entity';
-import { Campaign } from '../../campaigns/domain/campaign.entity';
 import { Payment } from '../../payments/domain/payment.entity';
 
 export enum ContributionStatus {
@@ -37,21 +35,12 @@ export class Contribution {
   @Column({ type: 'text', nullable: true })
   message: string;
 
-  @Column({ default: false })
-  isAnonymous: boolean;
-
   @ManyToOne(() => User, (user) => user.contributions, { nullable: false })
   @JoinColumn({ name: 'userId' })
   user: User;
 
   @Column()
   userId: string;
-
-  @ManyToOne(() => Campaign, (campaign) => campaign.contributions, {
-    nullable: false,
-  })
-  @JoinColumn({ name: 'campaignId' })
-  campaign: Campaign;
 
   @Column()
   campaignId: string;
@@ -61,7 +50,4 @@ export class Contribution {
 
   @CreateDateColumn()
   createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 }

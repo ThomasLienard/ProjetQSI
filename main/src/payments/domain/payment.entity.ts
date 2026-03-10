@@ -46,12 +46,6 @@ export class Payment {
   })
   method: PaymentMethod;
 
-  @Column({ nullable: true })
-  stripePaymentIntentId: string;
-
-  @Column({ nullable: true })
-  stripeChargeId: string;
-
   @Column({ type: 'text', nullable: true })
   errorMessage: string;
 
@@ -69,7 +63,4 @@ export class Payment {
 
   @CreateDateColumn()
   createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 }
