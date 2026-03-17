@@ -7,7 +7,7 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import { Contribution, ContributionEntity } from '../../contributions/entity/contribution.entity';
+import { ContributionEntity } from '../../contributions/entity/contribution.entity';
 
 export enum PaymentStatus {
   PENDING = 'pending',
@@ -52,7 +52,7 @@ export class PaymentEntity {
   @Column({ type: 'jsonb', nullable: true })
   metadata: Record<string, any>;
 
-  @OneToOne(() => ContributionEntity, (contribution) => contribution.payementId, {
+  @OneToOne(() => ContributionEntity, (contribution) => contribution.paymentId, {
     nullable: false,
   })
   @JoinColumn({ name: 'contributionId' })

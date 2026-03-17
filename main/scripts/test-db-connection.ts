@@ -29,7 +29,6 @@ async function testConnection() {
       '📊 Les tables suivantes ont été créées/synchronisées :',
     );
     console.log('   - users');
-    console.log('   - campaigns');
     console.log('   - contributions');
     console.log('   - payments');
     console.log('   - moderation_reports');

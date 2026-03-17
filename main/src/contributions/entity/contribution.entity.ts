@@ -18,6 +18,9 @@ export class ContributionEntity {
   @Column()
   campaignId: string;
 
+  @Column()
+  paymentId: string;
+
   @CreateDateColumn()
   createdAt: Date;
 }
