@@ -21,8 +21,8 @@ export enum ContributionStatus {
 
 @Entity('contributions')
 export class Contribution {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column({ type: 'decimal', precision: 10, scale: 2 })
   amount: number;
@@ -45,7 +45,7 @@ export class Contribution {
   user: User;
 
   @Column()
-  userId: number;
+  userId: string;
 
   @ManyToOne(() => Campaign, (campaign) => campaign.contributions, {
     nullable: false,
@@ -54,7 +54,7 @@ export class Contribution {
   campaign: Campaign;
 
   @Column()
-  campaignId: number;
+  campaignId: string;
 
   @OneToOne(() => Payment, (payment) => payment.contribution)
   payment: Payment;

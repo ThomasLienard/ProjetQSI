@@ -26,8 +26,8 @@ export enum PaymentMethod {
 
 @Entity('payments')
 export class Payment {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column({ type: 'decimal', precision: 10, scale: 2 })
   amount: number;
@@ -65,7 +65,7 @@ export class Payment {
   contribution: Contribution;
 
   @Column()
-  contributionId: number;
+  contributionId: string;
 
   @CreateDateColumn()
   createdAt: Date;
