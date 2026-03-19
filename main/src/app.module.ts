@@ -5,10 +5,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { getDatabaseConfig } from './shared/config/database.config';
 import { UsersModule } from './users/users.module';
-import { CampaignsModule } from './campaigns/campaigns.module';
 import { ContributionsModule } from './contributions/contributions.module';
 import { PaymentsModule } from './payments/payments.module';
-import { ModerationModule } from './moderation/moderation.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -22,10 +21,11 @@ import { ModerationModule } from './moderation/moderation.module';
         getDatabaseConfig(configService),
     }),
     UsersModule,
-    CampaignsModule,
+    // CampaignsModule,
     ContributionsModule,
     PaymentsModule,
-    ModerationModule,
+    // ModerationModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
