@@ -48,12 +48,6 @@ export class User {
   @Column({ nullable: true })
   address: string;
 
-  @Column({ type: 'text', nullable: true })
-  bio: string;
-
-  @Column({ nullable: true })
-  avatarUrl: string;
-
   @OneToMany(() => Campaign, (campaign) => campaign.creator)
   campaigns: Campaign[];
 
