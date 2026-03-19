@@ -7,7 +7,6 @@ import { getDatabaseConfig } from './shared/config/database.config';
 import { UsersModule } from './users/users.module';
 import { ContributionsModule } from './contributions/contributions.module';
 import { PaymentsModule } from './payments/payments.module';
-import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -25,7 +24,6 @@ import { AuthModule } from './auth/auth.module';
     ContributionsModule,
     PaymentsModule,
     // ModerationModule,
-    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

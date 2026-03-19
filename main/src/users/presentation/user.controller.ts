@@ -7,42 +7,42 @@ import {
   Request,
   Post,
   UseGuards,
+  Put,
+  Param,
+  ParseUUIDPipe,
 } from '@nestjs/common';
-import { AuthService } from '../domain/auth.service';
 import { CredentialsDTO } from '../application/dto/credentials.dto';
 import { CreateUserDto } from 'src/users/application/dto/create-user.dto';
 import { JwtDTO } from '../application/dto/jwt.dto';
 import { UserResponseDTO } from 'src/users/application/dto/user-response.dto';
 import { UsersService } from 'src/users/domain/users.service';
-import { modelToResponse } from 'src/users/users.mapper';
-import { AuthGuard } from '../domain/auth.guard';
-import type { CustomRequest } from '../application/dto/custom-request.dto';
-import { RolesGuard } from '../domain/roles.guard';
-import { Roles } from '../domain/roles.decorator';
 import { UserRole } from 'src/users/domain/user.entity';
+import { UpdateUserDto } from '../application/dto/update-user.dto';
+import { AuthGuard } from 'src/shared/guards/auth.guard';
+import type { CustomRequest } from 'src/shared/dto/custom-request.dto';
+import { Roles } from 'src/shared/decorators/roles.decorator';
+import { RolesGuard } from 'src/shared/guards/roles.guard';
+import { modelToResponse } from '../application/users.mapper';
 
-@Controller('auth')
-export class AuthController {
-  constructor(
-    private readonly authService: AuthService,
-    private readonly usersService: UsersService,
-  ) {}
+@Controller('user')
+export class UserController {
+  constructor(private readonly usersService: UsersService) {}
 
   @HttpCode(HttpStatus.OK)
   @Post('login')
   signIn(@Body() signInDto: CredentialsDTO): Promise<JwtDTO> {
-    return this.authService.signIn(signInDto.email, signInDto.password);
+    return this.usersService.signIn(signInDto.email, signInDto.password);
   }
 
-  @HttpCode(HttpStatus.OK)
-  @Post('register')
+  @HttpCode(HttpStatus.CREATED)
+  @Post()
   async signUp(@Body() signUpDto: CreateUserDto): Promise<UserResponseDTO> {
     const user = await this.usersService.createUser(signUpDto);
     return modelToResponse(user);
   }
 
   @HttpCode(HttpStatus.OK)
-  @Get('profile')
+  @Get()
   @UseGuards(AuthGuard)
   async getProfile(@Request() req: CustomRequest): Promise<UserResponseDTO> {
     const user = await this.usersService.findById(req.user.sub);
@@ -51,7 +51,33 @@ export class AuthController {
   }
 
   @HttpCode(HttpStatus.OK)
-  @Get('user')
+  @Get(':id')
+  @UseGuards(AuthGuard, RolesGuard)
+  @Roles(UserRole.MODERATOR, UserRole.ADMIN)
+  async getById(
+    @Param('id', ParseUUIDPipe) id: string,
+  ): Promise<UserResponseDTO> {
+    const user = await this.usersService.findById(id);
+
+    return modelToResponse(user);
+  }
+
+  @HttpCode(HttpStatus.OK)
+  @Put()
+  @UseGuards(AuthGuard)
+  async updateSelf(
+    @Body() userDto: UpdateUserDto,
+    @Request() req: CustomRequest,
+  ): Promise<UserResponseDTO> {
+    const user = await this.usersService.updateSelf(req.user.sub, userDto);
+
+    return modelToResponse(user);
+  }
+
+  // Endpoints de test
+
+  @HttpCode(HttpStatus.OK)
+  @Get('role-user')
   @UseGuards(AuthGuard, RolesGuard)
   @Roles(UserRole.USER, UserRole.MODERATOR, UserRole.ADMIN)
   testUser(): string {
@@ -59,7 +85,7 @@ export class AuthController {
   }
 
   @HttpCode(HttpStatus.OK)
-  @Get('moderator')
+  @Get('role-moderator')
   @UseGuards(AuthGuard, RolesGuard)
   @Roles(UserRole.MODERATOR, UserRole.ADMIN)
   testModerator(): string {
@@ -67,7 +93,7 @@ export class AuthController {
   }
 
   @HttpCode(HttpStatus.OK)
-  @Get('admin')
+  @Get('role-admin')
   @UseGuards(AuthGuard, RolesGuard)
   @Roles(UserRole.ADMIN)
   testAdmin(): string {

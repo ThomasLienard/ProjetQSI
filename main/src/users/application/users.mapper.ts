@@ -1,6 +1,6 @@
-import { User } from './domain/user.entity';
-import { UserDTO } from './application/dto/user.dto';
-import { UserResponseDTO } from './application/dto/user-response.dto';
+import { User } from '../domain/user.entity';
+import { UserResponseDTO } from './dto/user-response.dto';
+import { UserDTO } from './dto/user.dto';
 
 export const entityToModel = function (user: User): UserDTO {
   return {
