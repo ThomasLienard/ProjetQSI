@@ -18,6 +18,7 @@ export class PaymentMapper {
     orm.id = domain.id;
     orm.amount = domain.amount;
     orm.status = domain.status as any;
+    orm.contributionId = domain.contributionId;
     return orm;
   }
 }
