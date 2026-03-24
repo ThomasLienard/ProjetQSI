@@ -1,98 +1,208 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# WeFund - Plateforme de Crowdfunding
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Projet de Qualité des Systèmes Informatiques - Plateforme de financement participatif développée avec NestJS et architecture hexagonale.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 📋 Description
 
-## Description
+WeFund est une plateforme de crowdfunding permettant aux utilisateurs de créer des campagnes de financement participatif et de contribuer à des projets. Le projet utilise une architecture hexagonale (ports & adapters) pour une meilleure maintenabilité et testabilité.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 🏗️ Architecture
 
-## Project setup
+Le projet suit une architecture hexagonale avec les domaines suivants :
+- **Users** : Gestion des utilisateurs et authentification
+- **Campaigns** : Gestion des campagnes de financement
+- **Contributions** : Gestion des contributions aux campagnes
+- **Payments** : Gestion des paiements via Stripe
+- **Moderation** : Modération et signalement de campagnes
 
+Chaque domaine est structuré en :
+- `domain/` : Entités et logique métier
+- `application/` : DTOs, ports et cas d'usage
+- `infrastructure/` : Adaptateurs et persistence
+- `presentation/` : Contrôleurs et endpoints API
+
+## 🚀 Démarrage rapide
+
+### Prérequis
+- Node.js >= 18
+- PostgreSQL >= 14 (ou Docker)
+- npm ou yarn
+
+### Installation
+
+1. **Cloner le projet**
 ```bash
-$ npm install
+cd main
 ```
 
-## Compile and run the project
-
+2. **Installer les dépendances**
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm install
 ```
 
-## Run tests
-
+3. **Configurer les variables d'environnement**
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+# Copier le fichier .env.example vers .env si nécessaire
+# Le fichier .env existe déjà avec la configuration de développement
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
+4. **Démarrer la base de données avec Docker (recommandé)**
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+# Démarrer PostgreSQL et PgAdmin
+docker-compose up -d
+
+# Vérifier que les conteneurs sont en cours d'exécution
+docker-compose ps
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Accès PgAdmin : http://localhost:5050
+- Email: admin@wefund.com
+- Password: admin
 
-## Resources
+5. **Démarrer l'application**
+```bash
+# Mode développement avec hot-reload
+npm run start:dev
 
-Check out a few resources that may come in handy when working with NestJS:
+# Mode production
+npm run build
+npm run start:prod
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+L'API sera disponible sur http://localhost:3000
 
-## Support
+## 📊 Base de données
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### Architecture de la base de données
 
-## Stay in touch
+La base de données PostgreSQL comprend 5 tables principales :
+- `users` : Utilisateurs de la plateforme
+- `campaigns` : Campagnes de financement
+- `contributions` : Contributions aux campagnes
+- `payments` : Transactions de paiement
+- `moderation_reports` : Signalements de modération
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Voir [docs/DATABASE.md](docs/DATABASE.md) pour plus de détails sur le schéma.
 
-## License
+### Gestion de la base de données
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+```bash
+# Avec Docker
+docker-compose up -d postgres
+
+# Sans Docker - se connecter à PostgreSQL
+sudo -u postgres psql
+
+# Créer la base de données
+CREATE DATABASE crowdfunding;
+```
+
+⚠️ **Note** : En développement, TypeORM synchronise automatiquement le schéma (`DB_SYNCHRONIZE=true`). En production, utiliser des migrations.
+
+## 🧪 Tests
+
+```bash
+# Tests unitaires
+npm run test
+
+# Tests en mode watch
+npm run test:watch
+
+# Tests e2e
+npm run test:e2e
+
+# Couverture de code
+npm run test:cov
+```
+
+## 🛠️ Commandes utiles
+
+```bash
+# Linter
+npm run lint
+
+# Formatage du code
+npm run format
+
+# Build
+npm run build
+
+# Démarrage en mode debug
+npm run start:debug
+```
+
+## 📁 Structure du projet
+
+```
+main/
+├── src/
+│   ├── campaigns/          # Module Campaigns
+│   │   ├── application/
+│   │   ├── domain/
+│   │   ├── infrastructure/
+│   │   └── presentation/
+│   ├── contributions/      # Module Contributions
+│   ├── moderation/         # Module Moderation
+│   ├── payments/          # Module Payments
+│   ├── users/             # Module Users
+│   ├── shared/            # Code partagé
+│   │   ├── config/
+│   │   ├── decorators/
+│   │   ├── exceptions/
+│   │   ├── guards/
+│   │   └── interfaces/
+│   ├── app.module.ts
+│   └── main.ts
+├── test/                  # Tests e2e
+├── docs/                  # Documentation
+├── database/             # Scripts SQL
+├── docker-compose.yml
+├── .env
+└── package.json
+```
+
+## 🔐 Sécurité
+
+### Variables d'environnement sensibles
+
+Ne jamais commiter le fichier `.env` avec des informations sensibles. Utiliser `.env.example` comme template.
+
+### Bonnes pratiques
+- Les mots de passe sont hashés avec bcrypt
+- JWT pour l'authentification
+- Validation des entrées utilisateur
+- Protection CORS configurée
+- Rate limiting (à implémenter)
+
+## 📚 Documentation
+
+- [Configuration de la base de données](docs/DATABASE.md)
+- [Guide d'architecture](pdf/COURS_2_ARCHITECTURE-1.pdf)
+- [Tests et qualité](pdf/COURS_3_TESTING-1.pdf)
+- [Spécifications du projet](pdf/Projet%20WeFund.pdf)
+
+## 🤝 Contribution
+
+Le projet suit les bonnes pratiques de développement :
+- Architecture hexagonale
+- Tests unitaires et d'intégration
+- Respect des principes SOLID
+- Clean Code
+
+## 📝 Technologies utilisées
+
+- **Framework** : NestJS 11
+- **ORM** : TypeORM
+- **Base de données** : PostgreSQL
+- **Tests** : Jest
+- **Validation** : class-validator
+- **Documentation** : Swagger (à implémenter)
+- **Logging** : Winston (à implémenter)
+
+## 📄 License
+
+UNLICENSED - Projet académique
+
+## 👥 Équipe
+
+Projet réalisé dans le cadre du cours de Qualité des Systèmes Informatiques.
