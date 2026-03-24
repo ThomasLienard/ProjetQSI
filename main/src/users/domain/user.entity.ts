@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
   OneToMany,
 } from 'typeorm';
-import * as contributionEntity from '../../contributions/entity/contribution.entity';
+import { ContributionEntity } from '../../contributions/entity/contribution.entity';
 
 export enum UserRole {
   USER = 'user',
@@ -47,14 +47,8 @@ export class User {
   @Column({ nullable: true })
   address: string;
 
-  @Column({ type: 'text', nullable: true })
-  bio: string;
-
-  @Column({ nullable: true })
-  avatarUrl: string;
-
-  @OneToMany(() => contributionEntity.ContributionEntity, (contribution) => contribution.userId)
-  contributions: contributionEntity.ContributionEntity[];
+  @OneToMany(() => ContributionEntity, (contribution) => contribution.userId)
+  contributions: ContributionEntity[];
 
   @CreateDateColumn()
   createdAt: Date;

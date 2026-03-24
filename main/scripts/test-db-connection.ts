@@ -2,6 +2,7 @@ import { DataSource } from 'typeorm';
 import { User } from '../src/users/domain/user.entity';
 import { ContributionEntity } from '../src/contributions/entity/contribution.entity';
 import { PaymentEntity } from '../src/payments/entity/payment.entity';
+
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -22,12 +23,8 @@ async function testConnection() {
   try {
     console.log('🔄 Tentative de connexion à la base de données...');
     await AppDataSource.initialize();
-    console.log(
-      '✅ Connexion à la base de données PostgreSQL réussie !',
-    );
-    console.log(
-      '📊 Les tables suivantes ont été créées/synchronisées :',
-    );
+    console.log('✅ Connexion à la base de données PostgreSQL réussie !');
+    console.log('📊 Les tables suivantes ont été créées/synchronisées :');
     console.log('   - users');
     console.log('   - contributions');
     console.log('   - payments');
