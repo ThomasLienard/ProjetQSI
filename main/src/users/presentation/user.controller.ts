@@ -51,6 +51,18 @@ export class UserController {
   }
 
   @HttpCode(HttpStatus.OK)
+  @Get(':id')
+  @UseGuards(AuthGuard, RolesGuard)
+  @Roles(UserRole.MODERATOR, UserRole.ADMIN)
+  async getById(
+    @Param('id', ParseUUIDPipe) id: string,
+  ): Promise<UserResponseDTO> {
+    const user = await this.usersService.findById(id);
+
+    return modelToResponse(user);
+  }
+
+  @HttpCode(HttpStatus.OK)
   @Put()
   @UseGuards(AuthGuard)
   async updateSelf(
@@ -86,17 +98,5 @@ export class UserController {
   @Roles(UserRole.ADMIN)
   testAdmin(): string {
     return 'Vous êtes bien admin';
-  }
-
-  @HttpCode(HttpStatus.OK)
-  @Get(':id')
-  @UseGuards(AuthGuard, RolesGuard)
-  @Roles(UserRole.MODERATOR, UserRole.ADMIN)
-  async getById(
-    @Param('id', ParseUUIDPipe) id: string,
-  ): Promise<UserResponseDTO> {
-    const user = await this.usersService.findById(id);
-
-    return modelToResponse(user);
   }
 }
