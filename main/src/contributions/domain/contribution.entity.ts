@@ -9,7 +9,6 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { User } from '../../users/domain/user.entity';
-import { Campaign } from '../../campaigns/domain/campaign.entity';
 import { Payment } from '../../payments/domain/payment.entity';
 
 export enum ContributionStatus {
@@ -47,11 +46,11 @@ export class Contribution {
   @Column()
   userId: string;
 
-  @ManyToOne(() => Campaign, (campaign) => campaign.contributions, {
-    nullable: false,
-  })
-  @JoinColumn({ name: 'campaignId' })
-  campaign: Campaign;
+  // @ManyToOne(() => Campaign, (campaign) => campaign.contributions, {
+  //   nullable: false,
+  // })
+  // @JoinColumn({ name: 'campaignId' })
+  // campaign: Campaign;
 
   @Column()
   campaignId: string;
