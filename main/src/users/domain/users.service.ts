@@ -38,7 +38,7 @@ export class UsersService {
     return entityToModel(user);
   }
 
-  async findById(userId: string): Promise<UserDTO> {
+  async findById(userId: number): Promise<UserDTO> {
     const user = await this.usersRepository.findOneBy({
       id: userId,
     });
@@ -91,7 +91,7 @@ export class UsersService {
     };
   }
 
-  async updateSelf(selfId: string, userDto: UpdateUserDto): Promise<UserDTO> {
+  async updateSelf(selfId: number, userDto: UpdateUserDto): Promise<UserDTO> {
     const user = await this.usersRepository.findOneBy({
       id: selfId,
     });

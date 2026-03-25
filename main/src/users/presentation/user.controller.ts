@@ -9,7 +9,7 @@ import {
   UseGuards,
   Put,
   Param,
-  ParseUUIDPipe,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { CredentialsDTO } from '../application/dto/credentials.dto';
 import { CreateUserDto } from 'src/users/application/dto/create-user.dto';
@@ -55,7 +55,7 @@ export class UserController {
   @UseGuards(AuthGuard, RolesGuard)
   @Roles(UserRole.MODERATOR, UserRole.ADMIN)
   async getById(
-    @Param('id', ParseUUIDPipe) id: string,
+    @Param('id', ParseIntPipe) id: number,
   ): Promise<UserResponseDTO> {
     const user = await this.usersService.findById(id);
 

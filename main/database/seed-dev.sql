@@ -9,9 +9,7 @@ INSERT INTO users (
   role,
   "isActive",
   "phoneNumber",
-  address,
-  bio,
-  "avatarUrl"
+  address
 ) VALUES
   (
     1,
@@ -22,9 +20,7 @@ INSERT INTO users (
     'user',
     true,
     '0600000001',
-    '1 rue de Paris',
-    'Contributrice de test',
-    NULL
+    '1 rue de Paris'
   ),
   (
     2,
@@ -35,9 +31,7 @@ INSERT INTO users (
     'moderator',
     true,
     '0600000002',
-    '2 rue de Lyon',
-    'Moderateur de test',
-    NULL
+    '2 rue de Lyon'
   )
 ON CONFLICT (id) DO UPDATE SET
   email = EXCLUDED.email,
@@ -48,8 +42,6 @@ ON CONFLICT (id) DO UPDATE SET
   "isActive" = EXCLUDED."isActive",
   "phoneNumber" = EXCLUDED."phoneNumber",
   address = EXCLUDED.address,
-  bio = EXCLUDED.bio,
-  "avatarUrl" = EXCLUDED."avatarUrl",
   "updatedAt" = NOW();
 
 INSERT INTO campaigns (

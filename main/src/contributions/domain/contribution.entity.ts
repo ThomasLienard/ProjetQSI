@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 import { User } from '../../users/domain/user.entity';
 import { Payment } from '../../payments/domain/payment.entity';
+import { Campaign } from '../../campaigns/domain/campaign.entity';
 
 export enum ContributionStatus {
   PENDING = 'pending',
@@ -46,11 +47,11 @@ export class Contribution {
   @Column()
   userId: number;
 
-  // @ManyToOne(() => Campaign, (campaign) => campaign.contributions, {
-  //   nullable: false,
-  // })
-  // @JoinColumn({ name: 'campaignId' })
-  // campaign: Campaign;
+  @ManyToOne(() => Campaign, (campaign) => campaign.contributions, {
+    nullable: false,
+  })
+  @JoinColumn({ name: 'campaignId' })
+  campaign: Campaign;
 
   @Column()
   campaignId: number;

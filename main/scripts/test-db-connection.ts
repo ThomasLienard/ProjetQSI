@@ -1,6 +1,6 @@
 import { DataSource } from 'typeorm';
 import { User } from '../src/users/domain/user.entity';
-// import { Campaign } from '../src/campaigns/domain/campaign.entity';
+import { Campaign } from '../src/campaigns/domain/campaign.entity';
 import { Contribution } from '../src/contributions/domain/contribution.entity';
 import { Payment } from '../src/payments/domain/payment.entity';
 // import { ModerationReport } from '../src/moderation/domain/moderation-report.entity';
@@ -16,7 +16,7 @@ const AppDataSource = new DataSource({
   password: process.env.DB_PASSWORD || 'postgres',
   database: process.env.DB_DATABASE || 'crowdfunding',
   // entities: [User, Campaign, Contribution, Payment, ModerationReport],
-  entities: [User, Contribution, Payment],
+  entities: [User, Campaign, Contribution, Payment],
   synchronize: true,
   logging: true,
 });
