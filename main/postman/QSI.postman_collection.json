@@ -1,9 +1,10 @@
 {
   "info": {
-    "_postman_id": "1d6d1273-bc7d-4035-a7cd-1e18fcf53838",
+    "_postman_id": "2653ea41-6621-4ce1-8294-878ddf38ba8a",
     "name": "QSI",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "24632808"
+    "_exporter_id": "50159965",
+    "_collection_link": "https://go.postman.co/collection/50159965-2653ea41-6621-4ce1-8294-878ddf38ba8a?source=collection_link"
   },
   "item": [
     {
@@ -15,6 +16,9 @@
             {
               "name": "Admin",
               "request": {
+                "auth": {
+                  "type": "noauth"
+                },
                 "method": "GET",
                 "header": [],
                 "url": {
@@ -35,6 +39,9 @@
             {
               "name": "Moderator",
               "request": {
+                "auth": {
+                  "type": "noauth"
+                },
                 "method": "GET",
                 "header": [],
                 "url": {
@@ -55,6 +62,16 @@
             {
               "name": "User",
               "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{BEARER_TOKEN}}",
+                      "type": "string"
+                    }
+                  ]
+                },
                 "method": "GET",
                 "header": [],
                 "url": {
@@ -84,7 +101,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"email\": \"test@test.fr\",\n  \"password\": \"password\",\n  \"firstName\": \"test\",\n  \"lastName\": \"test\"\n}",
+              "raw": "{\n  \"email\": \"test@testtt.fr\",\n  \"password\": \"password\",\n  \"firstName\": \"Ar\",\n  \"lastName\": \"Fiev\",\n  \"role\": \"admin\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -108,6 +125,9 @@
         {
           "name": "Get by id",
           "request": {
+            "auth": {
+              "type": "noauth"
+            },
             "method": "GET",
             "header": [],
             "url": {
@@ -131,14 +151,17 @@
             {
               "listen": "test",
               "script": {
-                "exec": [
-                  "var jsonData = pm.response.json();",
-                  "console.log(jsonData)",
-                  "pm.collectionVariables.set(\"BEARER_TOKEN\", jsonData.accessToken);"
-                ],
                 "type": "text/javascript",
                 "packages": {},
-                "requests": {}
+                "requests": {},
+                "exec": [
+                  "function onResponse(res) {",
+                  "  let data = pm.response.json();",
+                  "  pm.variables.set(\"BEARER_TOKEN\", data.accessToken);",
+                  "}",
+                  "",
+                  "onResponse(res);"
+                ]
               }
             }
           ],
@@ -175,6 +198,16 @@
         {
           "name": "Profile",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3NTY2NzJkMy05ZjhhLTRkMmQtODI5Ny1mZGI4MjM2NThjOGUiLCJlbWFpbCI6InRlc3RAdGVzdHR0LmZyIiwiZ3JvdXAiOiJ1c2VyIiwiaWF0IjoxNzc0NTQwMjE5LCJleHAiOjE3NzQ2MjY2MTl9.D3p9WTe0xXuTjtEM0XEotiNIdZhV0Ob7EYUzi8zcSao",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
             "header": [],
             "url": {
@@ -194,11 +227,14 @@
         {
           "name": "Update",
           "request": {
+            "auth": {
+              "type": "noauth"
+            },
             "method": "PUT",
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"firstName\": \"testtest\"\n}",
+              "raw": "{\n  \"firstName\": \"Arn\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -220,18 +256,48 @@
           "response": []
         }
       ]
+    },
+    {
+      "name": "Contribute",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{BEARER_TOKEN}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"montant\": 128}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/campaigns/1/contribution",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "campaigns",
+            "1",
+            "contribution"
+          ]
+        }
+      },
+      "response": []
     }
   ],
-  "auth": {
-    "type": "bearer",
-    "bearer": [
-      {
-        "key": "token",
-        "value": "{{BEARER_TOKEN}}",
-        "type": "string"
-      }
-    ]
-  },
   "event": [
     {
       "listen": "prerequest",
