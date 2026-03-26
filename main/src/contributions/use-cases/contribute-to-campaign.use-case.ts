@@ -27,39 +27,38 @@ export class ContributeToCampaign {
   async execute(request: ContributeRequest) {
     const isActive = await this.campaignGateway.isCampaignActive(request.campaignId);
     if (!isActive) {
-      return { success: false, error: new CampaignInactiveError(request.campaignId) };
+      throw new CampaignInactiveError(request.campaignId);
     }
 
-    try {
-      const contributionId = this.contributionRepository.getNextId();
+    const contributionId = this.contributionRepository.getNextId();
 
-      // 1. Créer la Contribution
-      const contribution = new Contribution(
-        contributionId as any,
-        request.amount,
-        request.userId,
-        request.campaignId,
-        ContributionStatus.PENDING,
-        new Date()
-      );
+    const contribution = new Contribution(
+      contributionId,
+      request.amount,
+      request.userId,
+      request.campaignId,
+      ContributionStatus.PENDING,
+      new Date()
+    );
 
-      // 2. Créer le Paiement associé (RG4)
-      const payment = new Payment(
-        this.paymentRepository.getNextId(),
-        contributionId,
-        request.amount,
-        PaymentStatus.PENDING,
-        new Date()
-      );
+    const payment = new Payment(
+      this.paymentRepository.getNextId(),
+      contributionId,
+      request.amount,
+      PaymentStatus.PENDING,
+      new Date()
+    );
 
-      // 3. Sauvegarder les deux
-      await this.contributionRepository.save(contribution);
-      await this.paymentRepository.save(payment);
+    await this.contributionRepository.save(contribution);
+    await this.paymentRepository.save(payment);
 
-      return { success: true, data: { contribution, payment } };
-      
-    } catch (e) {
-      return { success: false, error: e };
-    }
+    return {
+      amount: contribution.amount,
+      campaignId: contribution.campaignId,
+      userId: contribution.userId,
+      paymentId: payment.id, 
+      status: 'ACCEPTED',   
+      createdAt: contribution.createdAt,
+    };
   }
 }
