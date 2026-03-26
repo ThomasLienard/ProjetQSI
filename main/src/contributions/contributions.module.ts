@@ -15,8 +15,8 @@ import { HttpCampaignGateway } from './dto/campaign-gateway';
   imports: [
     TypeOrmModule.forFeature([ContributionEntity, PaymentEntity]),
     JwtModule.register({
-      secret: process.env.JWT_SECRET || 'secretKey', 
-    }),
+  secret: 'BIG_SECRET',
+}),
   ],
   controllers: [ContributionController],
   providers: [

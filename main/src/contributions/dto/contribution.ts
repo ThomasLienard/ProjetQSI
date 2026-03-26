@@ -10,6 +10,7 @@ export class Contribution {
     public readonly id: string,
     public readonly amount: number,
     public readonly userId: string,
+    public readonly paymentId: string,
     public readonly campaignId: string,
     public readonly status: ContributionStatus,
     public readonly createdAt: Date,

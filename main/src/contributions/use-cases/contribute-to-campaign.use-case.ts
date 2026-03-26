@@ -32,20 +32,21 @@ export class ContributeToCampaign {
 
     const contributionId = this.contributionRepository.getNextId();
 
-    const contribution = new Contribution(
-      contributionId,
-      request.amount,
-      request.userId,
-      request.campaignId,
-      ContributionStatus.PENDING,
-      new Date()
-    );
-
     const payment = new Payment(
       this.paymentRepository.getNextId(),
       contributionId,
       request.amount,
       PaymentStatus.PENDING,
+      new Date()
+    );
+
+    const contribution = new Contribution(
+      contributionId,
+      request.amount,
+      request.userId,
+      payment.id,
+      request.campaignId,
+      ContributionStatus.PENDING,
       new Date()
     );
 
