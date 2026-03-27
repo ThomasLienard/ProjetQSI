@@ -7,6 +7,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { Contribution } from '../../contributions/domain/contribution.entity';
+import { Campaign } from '../../campaigns/domain/campaign.entity';
 
 export enum UserRole {
   USER = 'user',
@@ -16,8 +17,8 @@ export enum UserRole {
 
 @Entity('users')
 export class User {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column({ unique: true })
   email: string;
@@ -49,6 +50,9 @@ export class User {
 
   @OneToMany(() => Contribution, (contribution) => contribution.user)
   contributions: Contribution[];
+
+  @OneToMany(() => Campaign, (campaign) => campaign.creator)
+  campaigns: Campaign[];
 
   @CreateDateColumn()
   createdAt: Date;

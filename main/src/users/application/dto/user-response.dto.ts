@@ -1,7 +1,7 @@
 import { UserRole } from 'src/users/domain/user.entity';
 
 export class UserResponseDTO {
-  readonly id: string;
+  readonly id: number;
 
   readonly email: string;
 

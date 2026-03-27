@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 import { User } from '../../users/domain/user.entity';
 import { Payment } from '../../payments/domain/payment.entity';
+import { Campaign } from '../../campaigns/domain/campaign.entity';
 
 export enum ContributionStatus {
   PENDING = 'pending',
@@ -20,8 +21,8 @@ export enum ContributionStatus {
 
 @Entity('contributions')
 export class Contribution {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column({ type: 'decimal', precision: 10, scale: 2 })
   amount: number;
@@ -44,16 +45,16 @@ export class Contribution {
   user: User;
 
   @Column()
-  userId: string;
+  userId: number;
 
-  // @ManyToOne(() => Campaign, (campaign) => campaign.contributions, {
-  //   nullable: false,
-  // })
-  // @JoinColumn({ name: 'campaignId' })
-  // campaign: Campaign;
+  @ManyToOne(() => Campaign, (campaign) => campaign.contributions, {
+    nullable: false,
+  })
+  @JoinColumn({ name: 'campaignId' })
+  campaign: Campaign;
 
   @Column()
-  campaignId: string;
+  campaignId: number;
 
   @OneToOne(() => Payment, (payment) => payment.contribution)
   payment: Payment;
