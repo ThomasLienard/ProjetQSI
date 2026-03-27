@@ -7,7 +7,7 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import { Contribution } from '../../contributions/domain/contribution.entity';
+import { ContributionEntity } from '../../contributions/entity/contribution.entity';
 
 export enum PaymentStatus {
   PENDING = 'pending',
@@ -25,7 +25,7 @@ export enum PaymentMethod {
 }
 
 @Entity('payments')
-export class Payment {
+export class PaymentEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -46,30 +46,21 @@ export class Payment {
   })
   method: PaymentMethod;
 
-  @Column({ nullable: true })
-  stripePaymentIntentId: string;
-
-  @Column({ nullable: true })
-  stripeChargeId: string;
-
   @Column({ type: 'text', nullable: true })
   errorMessage: string;
 
   @Column({ type: 'jsonb', nullable: true })
   metadata: Record<string, any>;
 
-  @OneToOne(() => Contribution, (contribution) => contribution.payment, {
+  @OneToOne(() => ContributionEntity, (contribution) => contribution.paymentId, {
     nullable: false,
   })
   @JoinColumn({ name: 'contributionId' })
-  contribution: Contribution;
+  contribution: ContributionEntity;
 
   @Column()
   contributionId: string;
 
   @CreateDateColumn()
   createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 }
