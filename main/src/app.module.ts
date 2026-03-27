@@ -8,6 +8,7 @@ import { UsersModule } from './users/users.module';
 import { ContributionsModule } from './contributions/contributions.module';
 import { PaymentsModule } from './payments/payments.module';
 import { CampaignsModule } from './campaigns/campaigns.module';
+import { ModerationModule } from './moderation/moderation.module';
 
 @Module({
   imports: [
@@ -24,7 +25,7 @@ import { CampaignsModule } from './campaigns/campaigns.module';
     CampaignsModule,
     ContributionsModule,
     PaymentsModule,
-    // ModerationModule,
+    ModerationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -16,6 +16,11 @@ export enum ModerationStatus {
   REFUSED = 'refused',
 }
 
+export enum ModerationDecision {
+  ACTIVE = 'active',
+  REFUSED = 'refusee',
+}
+
 @Entity('moderation_reports')
 export class ModerationReport {
   @PrimaryGeneratedColumn()
@@ -27,6 +32,9 @@ export class ModerationReport {
     default: ModerationStatus.PENDING,
   })
   status: ModerationStatus;
+
+  @Column({ type: 'text', nullable: true })
+  reason: string | null;
 
   @ManyToOne(() => Campaign, { nullable: false })
   @JoinColumn({ name: 'campaignId' })
