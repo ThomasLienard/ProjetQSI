@@ -5,9 +5,10 @@ import { ModerationService } from './application/moderation.service';
 import { ModerationController } from './presentation/moderation.controller';
 import { CampaignsClient } from './infrastructure/clients/campaigns.client';
 import { CAMPAIGNS_PORT } from './application/ports/campaigns.port';
+import { UsersModule } from '../users/users.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ModerationReport])],
+  imports: [TypeOrmModule.forFeature([ModerationReport]), UsersModule],
   controllers: [ModerationController],
   providers: [
     ModerationService,

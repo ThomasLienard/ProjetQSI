@@ -22,7 +22,7 @@ import { UserController } from './presentation/user.controller';
     }),
   ],
   controllers: [UserController],
-  exports: [TypeOrmModule, UsersService],
+  exports: [TypeOrmModule, UsersService, JwtModule],
   providers: [UsersService],
 })
 export class UsersModule {}
