@@ -9,8 +9,8 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { User } from '../../users/domain/user.entity';
-import { Payment } from '../../payments/domain/payment.entity';
 import { Campaign } from '../../campaigns/domain/campaign.entity';
+import { Payment } from '../../payments/domain/payment.entity';
 
 export enum ContributionStatus {
   PENDING = 'pending',
