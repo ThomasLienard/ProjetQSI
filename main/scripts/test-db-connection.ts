@@ -2,7 +2,6 @@ import { DataSource } from 'typeorm';
 import { User } from '../src/users/domain/user.entity';
 import { ContributionEntity } from '../src/contributions/entity/contribution.entity';
 import { PaymentEntity } from '../src/payments/entity/payment.entity';
-
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -28,7 +27,6 @@ async function testConnection() {
     console.log('   - users');
     console.log('   - contributions');
     console.log('   - payments');
-    console.log('   - moderation_reports');
 
     await AppDataSource.destroy();
     console.log('✅ Test de connexion réussi !');

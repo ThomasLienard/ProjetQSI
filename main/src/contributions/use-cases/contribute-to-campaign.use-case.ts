@@ -3,9 +3,8 @@ import { Injectable, Inject } from '@nestjs/common';
 import type { ContributionRepository } from '../repository/contribution.repository.interface';
 import type { CampaignGateway } from '../dto/campaign-gateway.interface';
 import { Contribution, ContributionStatus } from '../dto/contribution';
-import { CampaignInactiveError } from  '../../errors/contribution.errors';
-import { Payment } from '../../payments/dto/payment';
-import { PaymentStatus } from '../../payments/dto/payment';
+import { CampaignInactiveError } from '../../errors/contribution.errors';
+import { Payment, PaymentStatus } from '../../payments/dto/payment';
 
 export class ContributeRequest {
   amount: number;
@@ -21,11 +20,16 @@ export class ContributeToCampaign {
     @Inject('CampaignGateway')
     private readonly campaignGateway: CampaignGateway,
     @Inject('PaymentRepository')
-    private readonly paymentRepository: { save: (p: Payment) => Promise<void>, getNextId: () => string },
+    private readonly paymentRepository: {
+      save: (p: Payment) => Promise<void>;
+      getNextId: () => string;
+    },
   ) {}
 
   async execute(request: ContributeRequest) {
-    const isActive = await this.campaignGateway.isCampaignActive(request.campaignId);
+    const isActive = await this.campaignGateway.isCampaignActive(
+      request.campaignId,
+    );
     if (!isActive) {
       throw new CampaignInactiveError(request.campaignId);
     }
@@ -37,7 +41,7 @@ export class ContributeToCampaign {
       contributionId,
       request.amount,
       PaymentStatus.PENDING,
-      new Date()
+      new Date(),
     );
 
     const contribution = new Contribution(
@@ -47,7 +51,7 @@ export class ContributeToCampaign {
       payment.id,
       request.campaignId,
       ContributionStatus.PENDING,
-      new Date()
+      new Date(),
     );
 
     await this.contributionRepository.save(contribution);
@@ -57,8 +61,8 @@ export class ContributeToCampaign {
       amount: contribution.amount,
       campaignId: contribution.campaignId,
       userId: contribution.userId,
-      paymentId: payment.id, 
-      status: 'ACCEPTED',   
+      paymentId: payment.id,
+      status: 'ACCEPTED',
       createdAt: contribution.createdAt,
     };
   }
