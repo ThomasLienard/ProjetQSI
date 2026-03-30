@@ -1,7 +1,7 @@
 import { DataSource } from 'typeorm';
 import { User } from '../src/users/domain/user.entity';
-import { Contribution } from '../src/contributions/domain/contribution.entity';
-import { Payment } from '../src/payments/domain/payment.entity';
+import { ContributionEntity } from '../src/contributions/entity/contribution.entity';
+import { PaymentEntity } from '../src/payments/entity/payment.entity';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -13,7 +13,7 @@ const AppDataSource = new DataSource({
   username: process.env.DB_USERNAME || 'postgres',
   password: process.env.DB_PASSWORD || 'postgres',
   database: process.env.DB_DATABASE || 'crowdfunding',
-  entities: [User, Contribution, Payment],
+  entities: [User, ContributionEntity, PaymentEntity],
   synchronize: true,
   logging: true,
 });

@@ -1,35 +1,42 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Contribution } from './domain/contribution.entity';
-import { ContributionsController } from './infrastructure/controllers/contributions.controller';
-import { TypeOrmContributionRepository } from './infrastructure/adapters/typeorm-contribution.repository';
-import { HttpCampaignService } from './infrastructure/adapters/http-campaign.service';
-import { CreateContributionUseCase } from './application/use-cases/create-contribution.use-case';
-import { GetContributionsByUserUseCase } from './application/use-cases/get-contributions-by-user.use-case';
-import { UpdateContributionAmountUseCase } from './application/use-cases/update-contribution-amount.use-case';
-import { RefundContributionUseCase } from './application/use-cases/refund-contribution.use-case';
-import { CONTRIBUTION_REPOSITORY } from './application/ports/contribution.repository.interface';
-import { CAMPAIGN_SERVICE } from './application/ports/campaign.service.interface';
+import { JwtModule } from '@nestjs/jwt';
+import { ContributionController } from './controller/contribution.controller';
+import { ContributeToCampaign } from './use-cases/contribute-to-campaign.use-case';
+import { RefundContributionUseCase } from './use-cases/refund-contribution.use-case';
+import { UpdateContributionAmountUseCase } from './use-cases/update-contribution-amount.use-case';
+import { AuthGuard } from '../shared/guards/auth.guard';
+import { ContributionEntity } from './entity/contribution.entity';
+import { PaymentEntity } from '../payments/entity/payment.entity';
+import { TypeOrmContributionRepository } from './repository/contribution.repository';
+import { TypeOrmPaymentRepository } from '../payments/repository/payment.repository';
+import { HttpCampaignGateway } from './dto/campaign-gateway';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Contribution])],
-  controllers: [ContributionsController],
+  imports: [
+    TypeOrmModule.forFeature([ContributionEntity, PaymentEntity]),
+    JwtModule.register({
+      secret: 'BIG_SECRET',
+    }),
+  ],
+  controllers: [ContributionController],
   providers: [
-    // Use Cases
-    CreateContributionUseCase,
-    GetContributionsByUserUseCase,
-    UpdateContributionAmountUseCase,
+    ContributeToCampaign,
     RefundContributionUseCase,
-    // Adapters
+    UpdateContributionAmountUseCase,
+    AuthGuard,
     {
-      provide: CONTRIBUTION_REPOSITORY,
+      provide: 'ContributionRepository',
       useClass: TypeOrmContributionRepository,
     },
     {
-      provide: CAMPAIGN_SERVICE,
-      useClass: HttpCampaignService,
+      provide: 'PaymentRepository',
+      useClass: TypeOrmPaymentRepository,
+    },
+    {
+      provide: 'CampaignGateway',
+      useClass: HttpCampaignGateway,
     },
   ],
-  exports: [TypeOrmModule, CONTRIBUTION_REPOSITORY],
 })
 export class ContributionsModule {}
