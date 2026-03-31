@@ -14,7 +14,7 @@ import { ModerationResponseDto } from '../application/dtos/moderation-response.d
 import { AuthGuard } from '../../shared/guards/auth.guard';
 import { RolesGuard } from '../../shared/guards/roles.guard';
 import { Roles } from '../../shared/decorators/roles.decorator';
-import { UserRole } from '../../users/domain/user.entity';
+import { UserRole } from '../../users/entity/user.entity';
 import type { CustomRequest } from '../../shared/dto/custom-request.dto';
 
 @Controller('moderation')

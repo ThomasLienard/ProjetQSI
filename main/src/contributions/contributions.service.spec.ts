@@ -1,9 +1,9 @@
 import { NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { ContributionStatus } from './domain/contribution.entity';
+import { ContributionStatus } from './entity/contribution.entity';
 import { ContributionsService } from './contributions.service';
-import { Contribution } from './domain/contribution.entity';
-import { User } from '../users/domain/user.entity';
+import { Contribution } from './entity/contribution.entity';
+import { User } from '../users/entity/user.entity';
 
 describe('ContributionsService', () => {
   let service: ContributionsService;

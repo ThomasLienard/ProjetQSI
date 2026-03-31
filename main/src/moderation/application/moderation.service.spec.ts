@@ -5,7 +5,7 @@ import {
   ModerationReport,
   ModerationStatus,
   ModerationDecision,
-} from '../domain/moderation-report.entity';
+} from '../entity/moderation-report.entity';
 import { CampaignsPort } from '../application/ports/campaigns.port';
 
 describe('ModerationService', () => {

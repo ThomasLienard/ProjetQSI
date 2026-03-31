@@ -8,9 +8,9 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import { User } from '../../users/domain/user.entity';
+import { User } from '../../users/entity/user.entity';
 import { Campaign } from '../../campaigns/domain/campaign.entity';
-import { Payment } from '../../payments/domain/payment.entity';
+import { Payment } from '../../payments/entity/payment.entity';
 
 export enum ContributionStatus {
   PENDING = 'pending',

@@ -1,4 +1,4 @@
-import { ModerationStatus } from '../../domain/moderation-report.entity';
+import { ModerationStatus } from '../../entity/moderation-report.entity';
 
 export class ModerationResponseDto {
   id: number;

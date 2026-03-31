@@ -1,4 +1,4 @@
-import { ContributionStatus } from '../../domain/contribution.entity';
+import { ContributionStatus } from '../../entity/contribution.entity';
 
 export class ContributionDetailsDto {
   id: number;

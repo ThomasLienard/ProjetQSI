@@ -8,8 +8,8 @@ import {
   OneToMany,
   JoinColumn,
 } from 'typeorm';
-import { User } from '../../users/domain/user.entity';
-import { Contribution } from '../../contributions/domain/contribution.entity';
+import { User } from '../../users/entity/user.entity';
+import { Contribution } from '../../contributions/entity/contribution.entity';
 
 export enum CampaignStatus {
   ACTIVE = 'active',

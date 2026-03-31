@@ -1,4 +1,4 @@
-import { User } from '../domain/user.entity';
+import { User } from '../entity/user.entity';
 import { UserResponseDTO } from './dto/user-response.dto';
 import { UserDTO } from './dto/user.dto';
 

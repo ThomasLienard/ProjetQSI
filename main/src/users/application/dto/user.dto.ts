@@ -1,4 +1,4 @@
-import { UserRole } from '../../domain/user.entity';
+import { UserRole } from '../../entity/user.entity';
 
 export class UserDTO {
   readonly id: number;

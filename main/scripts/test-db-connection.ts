@@ -1,8 +1,8 @@
 import { DataSource } from 'typeorm';
-import { User } from '../src/users/domain/user.entity';
+import { User } from '../src/users/entity/user.entity';
 import { Campaign } from '../src/campaigns/domain/campaign.entity';
-import { Contribution } from '../src/contributions/domain/contribution.entity';
-import { Payment } from '../src/payments/domain/payment.entity';
+import { Contribution } from '../src/contributions/entity/contribution.entity';
+import { Payment } from '../src/payments/entity/payment.entity';
 // import { ModerationReport } from '../src/moderation/domain/moderation-report.entity';
 import * as dotenv from 'dotenv';
 

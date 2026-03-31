@@ -7,7 +7,7 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import { Contribution } from '../../contributions/domain/contribution.entity';
+import { Contribution } from '../../contributions/entity/contribution.entity';
 
 export enum PaymentStatus {
   PENDING = 'pending',

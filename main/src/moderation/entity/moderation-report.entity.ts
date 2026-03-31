@@ -7,7 +7,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { User } from '../../users/domain/user.entity';
+import { User } from '../../users/entity/user.entity';
 import { Campaign } from '../../campaigns/domain/campaign.entity';
 
 export enum ModerationStatus {

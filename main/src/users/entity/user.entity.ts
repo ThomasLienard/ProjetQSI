@@ -7,7 +7,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { Campaign } from '../../campaigns/domain/campaign.entity';
-import { Contribution } from '../../contributions/domain/contribution.entity';
+import { Contribution } from '../../contributions/entity/contribution.entity';
 
 export enum UserRole {
   USER = 'user',

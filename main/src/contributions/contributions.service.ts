@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Contribution } from './domain/contribution.entity';
-import { User } from '../users/domain/user.entity';
+import { Contribution } from './entity/contribution.entity';
+import { User } from '../users/entity/user.entity';
 import { ContributionSummaryDto } from './application/dtos/contribution-summary.dto';
 import { ContributionDetailsDto } from './application/dtos/contribution-details.dto';
 

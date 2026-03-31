@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ContributionStatus } from './domain/contribution.entity';
+import { ContributionStatus } from './entity/contribution.entity';
 import { ContributionsController } from './contributions.controller';
 import { ContributionsService } from './contributions.service';
 

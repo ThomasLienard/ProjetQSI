@@ -11,7 +11,7 @@ import {
   ModerationReport,
   ModerationStatus,
   ModerationDecision,
-} from '../domain/moderation-report.entity';
+} from '../entity/moderation-report.entity';
 import { ModerateCampaignDto } from './dtos/moderate-campaign.dto';
 import { ModerationResponseDto } from './dtos/moderation-response.dto';
 import type { CampaignsPort } from './ports/campaigns.port';

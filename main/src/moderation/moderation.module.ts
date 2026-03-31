@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ModerationReport } from './domain/moderation-report.entity';
+import { ModerationReport } from './entity/moderation-report.entity';
 import { ModerationService } from './application/moderation.service';
 import { ModerationController } from './presentation/moderation.controller';
 import { CampaignsClient } from './infrastructure/clients/campaigns.client';

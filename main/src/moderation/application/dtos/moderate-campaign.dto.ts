@@ -1,5 +1,5 @@
 import { IsEnum, IsOptional, IsString } from 'class-validator';
-import { ModerationDecision } from '../../domain/moderation-report.entity';
+import { ModerationDecision } from '../../entity/moderation-report.entity';
 
 export class ModerateCampaignDto {
   @IsEnum(ModerationDecision, {

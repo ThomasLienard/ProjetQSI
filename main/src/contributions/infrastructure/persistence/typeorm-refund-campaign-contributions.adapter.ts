@@ -4,7 +4,7 @@ import { In, Repository } from 'typeorm';
 import {
   Contribution,
   ContributionStatus,
-} from '../../domain/contribution.entity';
+} from '../../entity/contribution.entity';
 import type {
   RefundCampaignContributionsPort,
   RefundCampaignContributionsResult,

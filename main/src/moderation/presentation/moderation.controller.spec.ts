@@ -3,9 +3,9 @@ import { ModerationService } from '../application/moderation.service';
 import {
   ModerationStatus,
   ModerationDecision,
-} from '../domain/moderation-report.entity';
+} from '../entity/moderation-report.entity';
 import type { CustomRequest } from '../../shared/dto/custom-request.dto';
-import { UserRole } from '../../users/domain/user.entity';
+import { UserRole } from '../../users/entity/user.entity';
 
 describe('ModerationController', () => {
   let controller: ModerationController;
