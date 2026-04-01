@@ -1,13 +1,16 @@
 # ProjetQSI
+## Projet n°2
 
-## Membres : 
+## Membres (et pseudos github) : 
 
-* Thomas LIENARD
+Jogozan : Seïf-Eddin Bouguerouche
+ThomasLienard : Thomas Lienard
+BaptisteParent : Baptiste Parent
+maureencfr : Maureen Coffre
+ElsaLogier : Elsa Logier
 
-* Baptiste PARENT
+## Fonctionnalités dans la branche dev
+- US 6 et US 7
 
-* Maureen COFFRE
-
-* Seif-Eddin BOUGUEROUCHE
-
-* Elsa LOGIER
+## Fonctionnalités dans la branche main
+- US 6 et US 7
